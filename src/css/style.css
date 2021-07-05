@@ -1,0 +1,39 @@
+* {
+  cursor: none;
+}
+
+body {
+  overflow: hidden;
+}
+
+.field {
+  display: flex;
+}
+
+.cell {
+  width: 111px;
+  height: 111px;
+  background-color: #bcbbb6;
+  background-image: url('../img/hole.png');
+  background-repeat: no-repeat;
+  border-radius: 11px;
+  margin: 3px;
+}
+
+.cat {
+  width: 111px;
+  height: 111px;
+  background-image: url('../img/cat.png');
+  background-repeat: no-repeat;
+}
+
+.cursor {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  background-image: url('../img/paw.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  transform: translate(-25%, -20%);
+}
