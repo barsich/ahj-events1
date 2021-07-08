@@ -1,10 +1,28 @@
+/* eslint-disable no-plusplus */
 import Counters from './Counters';
 
 export default class CatFlip {
   constructor() {
-    this.cells = Array.from(document.querySelectorAll('.cell'));
     this.counters = new Counters();
+    this.fieldSize = 4;
+    this.field = document.querySelector('.field');
+    this.cells = null;
+    this.previousIndex = null;
     this.interval = null;
+  }
+
+  createField() {
+    for (let i = 0; i < this.fieldSize; i++) {
+      const col = document.createElement('div');
+      col.classList.add('col');
+      this.field.appendChild(col);
+      for (let j = 0; j < this.fieldSize; j++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        col.appendChild(cell);
+      }
+    }
+    this.cells = Array.from(document.querySelectorAll('.cell'));
   }
 
   pets(event) {
@@ -30,7 +48,12 @@ export default class CatFlip {
         this.fail();
       }
     }
-    const randomCell = this.cells[Math.floor(Math.random() * this.cells.length)];
+    let randomIndex = Math.floor(Math.random() * this.cells.length);
+    while (randomIndex === this.previousIndex) {
+      randomIndex = Math.floor(Math.random() * this.cells.length);
+    }
+    const randomCell = this.cells[randomIndex];
+    this.previousIndex = randomIndex;
     const cat = document.createElement('div');
     cat.classList.add('cat');
     randomCell.appendChild(cat);
@@ -47,7 +70,7 @@ export default class CatFlip {
   }
 
   fail() {
-    alert('Котики непоглажены!');
+    alert('Котики не поглажены!');
     this.counters.petDiv.innerText = 0;
     this.counters.petCounter = 0;
     this.counters.ignoreDiv.innerText = 0;
